@@ -4,8 +4,7 @@ This project is a Flutter mobile application that utilizes BLE, Supabase, and So
 
 ## 🎥 Demo
 
-<video src="assets/videos/demo.mp4" controls="controls" style="max-height: 730px;">
-</video>
+https://user-images.githubusercontent.com/57944650/226742978-b0498358-9f9c-4529-88e1-b7028f0d7b55.mp4
 
 ## 🚀 Features
 
