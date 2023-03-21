@@ -4,6 +4,7 @@ This project is a Flutter mobile application that utilizes BLE, Supabase, and So
 
 ## 🎥 Demo
 
+<<<<<<< HEAD
 [![Final video of fixing issues in your code in VS Code]
 (https://img.youtube.com/vi/JLMbpiywVxQ/maxresdefault.jpg)]
 (https://github.com/AbdouAbarchiAboubacar/flutter_ble_supabase_socketio_demo/blob/master/assets/videos/demo.mp4)
@@ -13,6 +14,9 @@ This project is a Flutter mobile application that utilizes BLE, Supabase, and So
 
 <video src="https://github.com/AbdouAbarchiAboubacar/flutter_ble_supabase_socketio_demo/blob/master/assets/videos/demo.mp4" controls="controls" style="max-height: 230px;">
 </video>
+=======
+https://user-images.githubusercontent.com/57944650/226742978-b0498358-9f9c-4529-88e1-b7028f0d7b55.mp4
+>>>>>>> 57b2d83e4e844b5a721c9a46666d9319b89915e4
 
 ## 🚀 Features
 
