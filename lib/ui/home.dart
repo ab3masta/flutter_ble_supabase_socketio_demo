@@ -97,11 +97,11 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(scannedDevices[index].name,
+                                        Text("BLE device Name",
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold)),
-                                        Text(scannedDevices[index].id),
+                                        Text("BLE device id"),
                                         Row(
                                           children: [],
                                         )

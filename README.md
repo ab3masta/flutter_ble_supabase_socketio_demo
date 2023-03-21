@@ -2,6 +2,11 @@
 
 This project is a Flutter mobile application that utilizes BLE, Supabase, and Socket IO to create a real-time data exchange platform. Users can also upload a CSV file created by BLE data to Supabase.
 
+## 🎥 Demo
+
+<video src="assets/videos/demo.mp4" controls="controls" style="max-height: 730px;">
+</video>
+
 ## 🚀 Features
 
 - 🔌 Connect to BLE devices and exchange data
