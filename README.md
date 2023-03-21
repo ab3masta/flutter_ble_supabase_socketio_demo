@@ -1,16 +1,35 @@
-# flutter_ble_supabase_socketio_demo
+# 📊 Flutter BLE Supabase Socketio Demo
 
-A new Flutter project.
+This project is a Flutter mobile application that utilizes BLE, Supabase, and Socket IO to create a real-time data exchange platform. Users can also upload a CSV file created by BLE data to Supabase.
 
-## Getting Started
+## 🚀 Features
 
-This project is a starting point for a Flutter application.
+- 🔌 Connect to BLE devices and exchange data
+- 🔒 Authenticate users with Supabase authentication
+- 📊 Upload CSV files created by BLE data to Supabase
+- ⚡️ Exchange data in real-time using Socket IO
 
-A few resources to get you started if this is your first Flutter project:
+## 📋 Requirements
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Flutter SDK
+- Dart
+- BLE compatible device
+- Supabase account
+- Node.js
+- Node.js REST API server with Socket IO, such as [nodejs_restapi_get-started](https://github.com/AbdouAbarchiAboubacar/nodejs_restapi_get-started)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 💻 Installation
+
+1. Clone the repository: `git clone https://github.com/AbdouAbarchiAboubacar/flutter_ble_supabase_socketio_demo.git`
+2. Install dependencies: `flutter pub get`
+3. Configure Supabase credentials: `TODO`
+4. Configure Socket IO server: Follow the instructions for setting up a Socket IO server with a Node.js REST API server, such as [nodejs_restapi_get-started](https://github.com/AbdouAbarchiAboubacar/nodejs_restapi_get-started)
+5. Run the application: `flutter run`
+
+## 🤝 Contributing
+
+Contributions are always welcome! Please feel free to submit a pull request or open an issue.
+
+## 📄 License
+
+This project is licensed under the [MIT License](https://github.com/AbdouAbarchiAboubacar/flutter_ble_supabase_socketio_demo/blob/master/LICENCE).
