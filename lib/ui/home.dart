@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ble_supabase_socketio_demo/provider/appwrite_provider.dart';
 import 'package:flutter_ble_supabase_socketio_demo/provider/ble_provider.dart';
-import 'package:flutter_ble_supabase_socketio_demo/provider/read_write_file_provider.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:provider/provider.dart';
+
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +15,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static const menuItems = <String>["Scan BLE Devices"];
-  // providers
+  //
+  IO.Socket socket = IO.io("http://192.168.1.99:5000", <String, dynamic>{
+    "transports": ["websocket"],
+    'autoConnect': false,
+  });
+  String socketIoEventName = "ble_data";
+  bool socketioServerConnected = false;
 
   @override
   void initState() {
@@ -22,6 +29,36 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       Provider.of<AppwriteProvider>(context, listen: false).initializer();
     });
+    connectToSocketIoServer();
+  }
+
+  void connectToSocketIoServer() {
+    try {
+      // Connect to websocket
+      socket.connect();
+      // Handle socket events
+      // socket.on('connect', (_) => print('connect: ${socket.id}'));
+      socket.onConnect((_) {
+        setState(() {
+          socketioServerConnected = true;
+        });
+        print('//? socket connected');
+        print('//? socket connect: ${socket.id}');
+        socket.on(socketIoEventName, (data) {
+          print("//? socket IO on data => $data");
+          // socket.emit("ababab", "Client connected");
+        });
+      });
+      socket.onConnectError((data) {
+        print('//? socket connect error data => $data');
+      });
+
+      socket.onError((data) {
+        print('//? socket error data => $data');
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -75,7 +112,6 @@ class _HomePageState extends State<HomePage> {
                   stream: bLEProvider.getDiscoveredDeviceController.stream,
                   builder: ((context, snapshot) {
                     List<DiscoveredDevice>? scannedDevices = snapshot.data;
-                    print("//? scanned device ==> $scannedDevices ");
                     if (scannedDevices != null) {
                       return ListView.builder(
                           itemCount: scannedDevices.length,
@@ -97,14 +133,11 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("BLE device Name",
+                                        Text(scannedDevices[index].name,
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold)),
-                                        Text("BLE device id"),
-                                        Row(
-                                          children: [],
-                                        )
+                                        Text(scannedDevices[index].id),
                                       ],
                                     ),
                                   ),
@@ -208,6 +241,13 @@ class _HomePageState extends State<HomePage> {
                                               .getConnectedDeviceDeviceId!)),
                               builder: ((context, snapshot) {
                                 if (snapshot.data != null) {
+                                  if (socketioServerConnected) {
+                                    socket.emit(
+                                        socketIoEventName,
+                                        snapshot.data!
+                                            .map((e) => String.fromCharCode(e))
+                                            .toString());
+                                  }
                                   return Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: Column(
@@ -291,7 +331,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ],
                                   )
-                                : const Text("scanning paused",
+                                : const Text("scan paused",
                                     style: TextStyle(fontSize: 15)),
                           ],
                         ),
@@ -328,6 +368,25 @@ class _HomePageState extends State<HomePage> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.green),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  "SocketIo : ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  socketioServerConnected
+                                      ? "connected"
+                                      : "disconnected",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: socketioServerConnected
+                                          ? Colors.green
+                                          : Colors.red),
                                 )
                               ],
                             )

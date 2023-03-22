@@ -126,7 +126,7 @@ Future<String?> createDeviceUUIDFromAndroidDeviceInfo() async {
       throw 'device Id is null';
     }
     String deviceUuid =
-        "organizationName-0101-2018-${deviceId.substring(0, 4)}-${deviceId.substring(4)}";
+        "name-0101-2018-${deviceId.substring(0, 4)}-${deviceId.substring(4)}";
     return deviceUuid.trim();
   } on PlatformException {
     throw 'Failed to get device id.';
@@ -141,7 +141,7 @@ Future<String?> createDeviceModelNameFromAndroidDeviceInfo() async {
     if (androidInfo.model == null) {
       throw 'device model name is null';
     }
-    String deviceModelName = "organizationName-${androidInfo.model}";
+    String deviceModelName = "name-${androidInfo.model}";
     return deviceModelName.trim();
   } on PlatformException {
     throw 'Failed to create device model name.';
@@ -159,7 +159,7 @@ Future<String?> createDevicePasswordFromAndroidDeviceInfo() async {
       throw 'some needed device data are null';
     }
     String devicePassword =
-        "organizationName-@organizationName!!@-${androidInfo.board}-${androidInfo.display}-${androidInfo.model}";
+        "name-@name!!@-${androidInfo.board}-${androidInfo.display}-${androidInfo.model}";
     return devicePassword.trim();
   } on PlatformException {
     throw 'Failed to create device password.';

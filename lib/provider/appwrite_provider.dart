@@ -72,7 +72,8 @@ class AppwriteProvider extends ChangeNotifier {
       }
       notifyListeners();
     } on AppwriteException catch (e) {
-      print("//? createMonitorAccount ==> erreur $e");
+      print(
+          "//? createMonitorAccount  _deviceUUID::: $_deviceUUID ==> erreur $e");
       //show message to user or do other operation based on error as required
       if (e.type == "user_already_exists") {
         await createMonitorSession();
